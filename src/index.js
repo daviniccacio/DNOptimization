@@ -3,13 +3,19 @@ import { ensureAdmin } from './utils/admin.js';
 import { installApps } from './modules/apps.js';
 import { telemetryTweak } from './modules/system.js';
 import { ultimatePowerTweak, xboxDvrTweak } from './modules/gaming.js';
+import { readFileSync } from 'fs';
+
+const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)));
+const appVersion = pkg.version;
+
+
 
 // Força execução como administrador
 ensureAdmin();
 
 async function main() {
   console.clear();
-  p.intro(`🚀 DNOptimization - Windows 11 Optimizer & Dev Setup`);
+  p.intro(`🚀 DNOptimization v${appVersion} - Windows 11 Optimizer & Dev Setup`);
 
   const category = await p.select({
     message: 'O que você deseja fazer hoje?',
