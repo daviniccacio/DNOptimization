@@ -1,0 +1,27 @@
+# Dependências do Node
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Logs do NPM e Logs locais gerados pelo App
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+DNOptimization*.txt
+*.log
+
+# Arquivos do Sistema Operacional e Editores
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+repomix-output.xml

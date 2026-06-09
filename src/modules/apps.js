@@ -1,5 +1,6 @@
 import * as p from '@clack/prompts';
 import { runPowerShell } from '../utils/executer.js';
+import { addLog } from '../utils/logger.js';
 
 // Lista de ID's oficiais do repositório do Winget
 const availableApps = [
@@ -22,7 +23,7 @@ export async function installApps() {
 
   // Se o usuário apertar Ctrl+C ou cancelar
   if (p.isCancel(selectedApps)) {
-    return;
+    return false;
   }
 
   // Loop para instalar cada um dos apps selecionados
@@ -37,10 +38,12 @@ export async function installApps() {
       // --accept-source-agreements e --accept-package-agreements: Aceita os termos automaticamente
       await runPowerShell(`winget install --id ${appId} --silent --accept-source-agreements --accept-package-agreements`);
       s.stop(`✔️ ${appName} instalado com sucesso!`);
+      addLog(`SUCESSO: Instalação do programa ${appName} (ID: ${appId})`); // <-- ADICIONADO
     } catch (error) {
       s.stop(`❌ Falha ao instalar ${appName}.`);
       // Opcional: descomente a linha abaixo se quiser ver o log de erro do winget
-      // console.error(error);
+      addLog(`ERRO: Falha ao instalar o programa ${appName} (ID: ${appId}). Detalhes: ${error}`); // <-- ADICIONADO
+      console.error(error);
     }
   }
 }
